@@ -10,11 +10,10 @@ public class MainCharacter {
     public int width;
     public int height;
     public boolean isAlive;      //a boolean to determine is the hero is alive or not
-    public Rectangle rec;
 
     public boolean upPressed;
     public boolean downPressed;
-    public Rectangle mrec;
+    public Rectangle rec;
 
 
     public MainCharacter(int pxpos, int pypos, int pdx, int pdy, int pwidth, int pheight){
@@ -25,22 +24,31 @@ public class MainCharacter {
         width=pwidth;
         height=pheight;
         isAlive=true;
-        mrec=new Rectangle(xpos,ypos,width,height);
+        rec=new Rectangle(xpos+45,ypos+25,width-90,height-80);
     }
 
     public void move(){
 
-        if(upPressed==true){
-            dy=-4;
-        }else if(downPressed==true){
-            dy=4;
-        }else{
-            dy=0;
+    if (upPressed == true && ypos>-15) {
+        dy = -7;
+    } else if (downPressed == true && ypos<600) {
+        dy = 7;
+    } else {
+        dy = 0;
+    }
+
+        if(ypos<0){
+            //make it so the up button doesn't work until within range again
         }
+        if(ypos>550){
+            //make it so the down button doesn't work until within range again
+        }
+
 
         xpos=xpos+dx;
         ypos=ypos+dy;
-        mrec=new Rectangle(xpos,ypos,width,height);
+        rec=new Rectangle(xpos+45,ypos+25,width-90,height-80);
+
     }
 
 

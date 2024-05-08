@@ -22,14 +22,14 @@ public class OtherCharacters {
         width=pwidth;
         height=pheight;
         isAlive=true;
-        rec=new Rectangle(xpos,ypos,width,height);
+        rec=new Rectangle(xpos+20,ypos+20,width-40,height-40);
     }
 
     public void movebirds(){
 
         xpos=xpos+dx;
         ypos=ypos+dy;
-        rec=new Rectangle(xpos,ypos,width,height);
+        rec=new Rectangle(xpos+20,ypos+20,width-40,height-40);
     }
 
 
