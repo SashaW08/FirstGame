@@ -20,17 +20,15 @@ public class Background {
         isAlive=true;
     }
 
-    public void wrappingMove(){
+    public void wrappingMove() {
+        xpos += dx;
 
 
-        if(xpos<-1000){
-            xpos=3000;
+        if (xpos <= -width) {
+            xpos += width * 4;
         }
-        xpos = xpos + dx;
-        ypos = ypos + dy;
-
     }
 
 
 
-}
+    }
