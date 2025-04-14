@@ -9,7 +9,7 @@ public class SoundFile {
     Clip clip;
 
 
-    //constructor - specify the filename as the parameter
+    //constructor - specify the filename as the parameterr
     public SoundFile(String filename) {
         try {
             // Open an audio input stream.

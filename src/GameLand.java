@@ -185,7 +185,7 @@ public class GameLand implements Runnable, KeyListener {
 
     });}
 
-//*******************************************************************************
+//********************************************************************************
 //User Method Section
 //
 // put your code to do things here.
