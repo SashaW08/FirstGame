@@ -7,7 +7,7 @@ public class SoundFile {
 
 
     Clip clip;
-//
+//,
 
     //constructor - specify the filename as the parameterr
     public SoundFile(String filename) {
