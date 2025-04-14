@@ -18,7 +18,7 @@ public class QuizGame {
                 response.append(inputLine);
             }
             in.close();
-
+//
             String responseStr = response.toString();
 
             // Decode basic HTML entities

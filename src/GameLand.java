@@ -31,6 +31,7 @@ public class GameLand implements Runnable, KeyListener {
     //Sets the width and height of the program window
     final int WIDTH = 1000;
     final int HEIGHT = 700;
+    public int elapsedTime;
 
     //Declare the variables needed for the graphics
     public JFrame frame;
@@ -76,13 +77,12 @@ public class GameLand implements Runnable, KeyListener {
     public boolean startScreen = true;
     public boolean isPlaying = false;
     public boolean gameOver = false;
-    public boolean isOnQuiz = false;
+    public boolean isOnQuiz = false;//
     ///ADDED?????
     public boolean quizStarted = false;
 
     public long startTime;
     public long currentTime;
-    public long elapsedTime;
 
     public String gQuestion;
     public String gAnswer;
@@ -178,9 +178,11 @@ public class GameLand implements Runnable, KeyListener {
                 System.out.println("wrong...");
 
             }
-            quizStarted = false;
             isOnQuiz = false;
+            quizStarted = false;
             isPlaying = true;
+            //restart the game
+//            canvas.repaint(); // Optional: might help trigger UI refresh
         }
 
     });}
@@ -288,7 +290,6 @@ public class GameLand implements Runnable, KeyListener {
         g.clearRect(0, 0, WIDTH, HEIGHT);
         g.setFont(new Font("Arial", Font.BOLD, 30));
 
-
         if (startScreen == true) {
             g.drawImage(skyPic, sky.xpos, sky.ypos, sky.width, sky.height, null);
             g.drawImage(skyPicFlip, skyflip.xpos, skyflip.ypos, skyflip.width, skyflip.height, null);
@@ -297,11 +298,11 @@ public class GameLand implements Runnable, KeyListener {
             g.drawString("Press space bar to start!", 300, 300);
         }
 
-
         /**STEP 4: draw the images**/
         if (isPlaying == true) {
             if (isOnQuiz == true) {//?????
-                g.drawImage(quizBackground, 0, 0, WIDTH, HEIGHT, null);
+                System.out.println("on quiz");
+                g.drawImage(quizBackground, 0, 0, WIDTH, HEIGHT, null);//???????
                 if (gQuestion.length() > 58) {
                     g.drawString(gQuestion.substring(0, 58), 50, 240);
                     g.drawString(gQuestion.substring(58, gQuestion.length() - 1), 50, 280);
@@ -313,38 +314,42 @@ public class GameLand implements Runnable, KeyListener {
                 g.drawString(choiceC, 125, 600);
                 g.drawString(choiceD, 600, 600);
 
-            } else {//?????
+            }
+            if (!isOnQuiz){//?????
+                System.out.println("on sky1");
                 g.drawImage(skyPic, sky.xpos, sky.ypos, sky.width, sky.height, null);
                 g.drawImage(skyPicFlip, skyflip.xpos, skyflip.ypos, skyflip.width, skyflip.height, null);
                 g.drawImage(skyPic2, sky2.xpos, sky2.ypos, sky2.width, sky2.height, null);
                 g.drawImage(skyPicFlip2, skyflip2.xpos, skyflip2.ypos, skyflip2.width, skyflip2.height, null);
+                System.out.println("back to sky2");
+                if (planeNew != null && isOnQuiz == false) {
+                    g.drawImage(planeNewPic, planeNew.xpos, planeNew.ypos, planeNew.width, planeNew.height, null);
+                }
+
+                if (BirdArray != null) {
+                    for (int i = 0; i < BirdArray.length; i++) {
+                        g.drawImage(birdpic, BirdArray[i].xpos, BirdArray[i].ypos, BirdArray[i].width, BirdArray[i].height, null);
+                    }
+                }
+                if (Gift1Array != null) {
+                    for (int i = 0; i < Gift1Array.length; i++) {
+                        g.drawImage(gift1, Gift1Array[i].xpos, Gift1Array[i].ypos, Gift1Array[i].width, Gift1Array[i].height, null);
+                    }
+                }
+                if (Gift2Array != null) {
+                    for (int i = 0; i < Gift2Array.length; i++) {
+                        g.drawImage(gift2, Gift2Array[i].xpos, Gift2Array[i].ypos, Gift2Array[i].width, Gift2Array[i].height, null);
+                    }
+                }
+                if (Gift3Array != null) {
+                    for (int i = 0; i < Gift3Array.length; i++) {
+                        g.drawImage(gift3, Gift3Array[i].xpos, Gift3Array[i].ypos, Gift3Array[i].width, Gift3Array[i].height, null);
+                    }
+                }
             }
 
 
-            if (planeNew != null && isOnQuiz == false) {
-                g.drawImage(planeNewPic, planeNew.xpos, planeNew.ypos, planeNew.width, planeNew.height, null);
-            }
 
-            if (BirdArray != null) {
-                for (int i = 0; i < BirdArray.length; i++) {
-                    g.drawImage(birdpic, BirdArray[i].xpos, BirdArray[i].ypos, BirdArray[i].width, BirdArray[i].height, null);
-                }
-            }
-            if (Gift1Array != null) {
-                for (int i = 0; i < Gift1Array.length; i++) {
-                    g.drawImage(gift1, Gift1Array[i].xpos, Gift1Array[i].ypos, Gift1Array[i].width, Gift1Array[i].height, null);
-                }
-            }
-            if (Gift2Array != null) {
-                for (int i = 0; i < Gift2Array.length; i++) {
-                    g.drawImage(gift2, Gift2Array[i].xpos, Gift2Array[i].ypos, Gift2Array[i].width, Gift2Array[i].height, null);
-                }
-            }
-            if (Gift3Array != null) {
-                for (int i = 0; i < Gift3Array.length; i++) {
-                    g.drawImage(gift3, Gift3Array[i].xpos, Gift3Array[i].ypos, Gift3Array[i].width, Gift3Array[i].height, null);
-                }
-            }
 
 
         }
@@ -357,6 +362,7 @@ public class GameLand implements Runnable, KeyListener {
             g.drawImage(skyPic2, sky2.xpos, sky2.ypos, sky2.width, sky2.height, null);
             g.drawImage(skyPicFlip2, skyflip2.xpos, skyflip2.ypos, skyflip2.width, skyflip2.height, null);
             g.drawString("Game Over",400,300);
+
         }
         g.drawString("Score: "+String.valueOf(score),860,675);
 
@@ -441,6 +447,8 @@ public class GameLand implements Runnable, KeyListener {
             for (int i = 0; i < BirdArray.length; i++) {
                 if (planeNew.rec.intersects(BirdArray[i].rec) && planeNewisintersectingbird == false) {
                     planeNewisintersectingbird = true;
+                    planeNew.ypos=100;
+                    planeNew.move();
                     isPlaying = false;
                     gameOver = true;
                 }
@@ -454,6 +462,11 @@ public class GameLand implements Runnable, KeyListener {
         if(planeNew!=null && Gift1Array!=null) {
             for (int i = 0; i < Gift1Array.length; i++) {
                 if (planeNew.rec.intersects(Gift1Array[i].rec) && planeNewintersectinggift1 == false) {
+                    planeNew.ypos=100;
+                    while(planeNew.rec.intersects(Gift1Array[i].rec) && planeNewintersectinggift1 == false){
+                        planeNew.ypos+=100;
+                        planeNew.move();
+                    }
                     planeNewintersectinggift1 = true;
                     giftDifficulty=1;
                     isOnQuiz=true;
@@ -471,6 +484,11 @@ public class GameLand implements Runnable, KeyListener {
         if(planeNew!=null && Gift2Array!=null) {
             for (int i = 0; i < Gift2Array.length; i++) {
                 if (planeNew.rec.intersects(Gift2Array[i].rec) && planeNewintersectinggift2 == false) {
+                    planeNew.ypos=100;
+                    while(planeNew.rec.intersects(Gift1Array[i].rec) && planeNewintersectinggift2 == false){
+                        planeNew.ypos+=100;
+                        planeNew.move();
+                    }
                     planeNewintersectinggift2 = true;
                     giftDifficulty=2;
                     isOnQuiz=true;
@@ -485,6 +503,11 @@ public class GameLand implements Runnable, KeyListener {
         if(planeNew!=null && Gift3Array!=null) {
             for (int i = 0; i < Gift3Array.length; i++) {
                 if (planeNew.rec.intersects(Gift3Array[i].rec) && planeNewintersectinggift3 == false) {
+                    planeNew.ypos=100;
+                    while(planeNew.rec.intersects(Gift1Array[i].rec) && planeNewintersectinggift3 == false){
+                        planeNew.ypos+=100;
+                        planeNew.move();
+                    }
                     planeNewintersectinggift3 = true;
                     isOnQuiz=true;
                     giftDifficulty=3;

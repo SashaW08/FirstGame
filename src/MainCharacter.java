@@ -12,7 +12,7 @@ public class MainCharacter {
     public boolean isAlive;      //a boolean to determine is the hero is alive or not
 
     public boolean upPressed;
-    public boolean downPressed;
+    public boolean downPressed;//
     public Rectangle rec;
 
 

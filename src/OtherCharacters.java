@@ -13,7 +13,7 @@ public class OtherCharacters {
     public boolean isAlive;      //a boolean to determine is the hero is alive or not
     public Rectangle rec;
 
-
+    //
     public OtherCharacters(int pxpos, int pypos, int pdx, int pdy, int pwidth, int pheight){
         xpos=pxpos;
         ypos=pypos;
